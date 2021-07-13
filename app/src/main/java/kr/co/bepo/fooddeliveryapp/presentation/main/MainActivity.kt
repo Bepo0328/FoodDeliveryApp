@@ -1,7 +1,8 @@
-package kr.co.bepo.fooddeliveryapp
+package kr.co.bepo.fooddeliveryapp.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kr.co.bepo.fooddeliveryapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
