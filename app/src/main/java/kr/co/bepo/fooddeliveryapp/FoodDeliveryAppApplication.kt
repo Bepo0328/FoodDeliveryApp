@@ -8,7 +8,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class MainApplication : Application() {
+class FoodDeliveryAppApplication : Application() {
 
     companion object {
         var appContext: Context? = null
@@ -24,7 +24,7 @@ class MainApplication : Application() {
                 if (BuildConfig.DEBUG) Level.DEBUG
                 else Level.NONE
             )
-            androidContext(this@MainApplication)
+            androidContext(this@FoodDeliveryAppApplication)
             modules(appModule + dataModule + domainModule + viewModule + utilModule)
         }
     }
