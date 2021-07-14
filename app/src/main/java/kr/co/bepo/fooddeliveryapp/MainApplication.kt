@@ -25,7 +25,7 @@ class MainApplication : Application() {
                 else Level.NONE
             )
             androidContext(this@MainApplication)
-            modules(appModule + dataModule + domainModule + presenterModule + utilModule)
+            modules(appModule + dataModule + domainModule + viewModule + utilModule)
         }
     }
 

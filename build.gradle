@@ -6,6 +6,7 @@ buildscript {
     ext.koin_version = "2.2.3"
     ext.retrofit_version="2.9.0"
     ext.okhttp_version="4.9.1"
+    ext.navigation_version = "2.3.5"
 
     repositories {
         google()
