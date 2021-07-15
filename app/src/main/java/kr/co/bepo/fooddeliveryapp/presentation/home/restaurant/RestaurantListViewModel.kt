@@ -6,6 +6,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.RestaurantRepository
+import kr.co.bepo.fooddeliveryapp.domain.model.CellType
+import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class RestaurantListViewModel(
@@ -13,10 +15,23 @@ class RestaurantListViewModel(
     private val restaurantRepository: RestaurantRepository
 ) : BaseViewModel() {
 
-    val restaurantListLiveData = MutableLiveData<List<RestaurantEntity>>()
+    val restaurantListLiveData = MutableLiveData<List<RestaurantModel>>()
 
     override fun fetchData(): Job = viewModelScope.launch {
         val restaurantList = restaurantRepository.getList(restaurantCategory)
-        restaurantListLiveData.value = restaurantList
+        restaurantListLiveData.value = restaurantList.map {
+            RestaurantModel(
+                id = it.id,
+                restaurantInfoId = it.restaurantInfoId,
+                restaurantCategory = it.restaurantCategory,
+                restaurantTitle = it.restaurantTitle,
+                restaurantImageUrl = it.restaurantImageUrl,
+                grade = it.grade,
+                reviewCount = it.reviewCount,
+                deliveryTimeRange = it.deliveryTimeRange,
+                minPrice = it.minPrice,
+                deliveryTipRange = it.deliveryTipRange
+            )
+        }
     }
 }

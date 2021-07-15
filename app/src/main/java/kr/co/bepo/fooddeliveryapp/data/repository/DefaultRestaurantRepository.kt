@@ -26,6 +26,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -37,6 +38,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -48,6 +50,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -59,6 +62,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -70,6 +74,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -81,6 +86,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -92,6 +98,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -103,6 +110,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -114,6 +122,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             ),
             RestaurantEntity(
@@ -125,6 +134,7 @@ class DefaultRestaurantRepository(
                 grade = (1 until 5).random() + ((0..10).random() / 10f),
                 reviewCount = (0 until 200).random(),
                 deliveryTimeRange = Pair(0, 20),
+                minPrice = 7900,
                 deliveryTipRange = Pair(0, 2000)
             )
         )

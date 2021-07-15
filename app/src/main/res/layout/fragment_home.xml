@@ -148,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@color/primaryColor"
+            android:contentDescription="@string/no_image_found"
             android:src="@drawable/ic_shopping_basket"
             app:fabCustomSize="72dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -155,8 +156,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="38dp"
-            app:tint="@color/white"
-            tools:ignore="ContentDescription" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

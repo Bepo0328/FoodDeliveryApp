@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/restaurantImageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/no_image_found"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/no_image_found" />
+
+    <TextView
+        android:id="@+id/restaurantTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/restaurantImageView"
+        app:layout_constraintTop_toTopOf="@id/restaurantImageView"
+        tools:text="식당 이름" />
+
+    <TextView
+        android:id="@+id/gradeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_star"
+        app:drawableTint="@color/orange_yellow"
+        app:layout_constraintStart_toStartOf="@id/restaurantTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/restaurantTitleTextView"
+        tools:text="4.8" />
+
+    <TextView
+        android:id="@+id/reviewCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/gradeTextView"
+        app:layout_constraintStart_toEndOf="@id/gradeTextView"
+        app:layout_constraintTop_toTopOf="@id/gradeTextView"
+        tools:text="(100+)" />
+
+    <TextView
+        android:id="@+id/deliveryTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
+        android:drawablePadding="4dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_clock"
+        app:layout_constraintStart_toStartOf="@id/gradeTextView"
+        app:layout_constraintTop_toBottomOf="@id/gradeTextView"
+        tools:text="21~36분, " />
+
+    <TextView
+        android:id="@+id/minPriceTexView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/deliveryTimeTextView"
+        app:layout_constraintStart_toEndOf="@id/deliveryTimeTextView"
+        app:layout_constraintTop_toTopOf="@id/deliveryTimeTextView"
+        tools:text="최소주문 7,900원" />
+
+    <TextView
+        android:id="@+id/deliveryTipTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/gradeTextView"
+        app:layout_constraintTop_toBottomOf="@id/deliveryTimeTextView"
+        tools:text="배달팁 0원~2,700원" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/gray_226"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deliveryTipTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

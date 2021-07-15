@@ -36,8 +36,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 this@HomeFragment,
                 restaurantListFragmentList
             )
-            viewPager.adapter = viewPagerAdapter
         }
+
+        viewPager.adapter = viewPagerAdapter
         viewPager.offscreenPageLimit = restaurantCategories.size
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setText(restaurantCategories[position].categoryNameId)
