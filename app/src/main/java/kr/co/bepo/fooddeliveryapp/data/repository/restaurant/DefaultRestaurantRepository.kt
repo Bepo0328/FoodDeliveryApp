@@ -1,4 +1,4 @@
-package kr.co.bepo.fooddeliveryapp.data.repository
+package kr.co.bepo.fooddeliveryapp.data.repository.restaurant
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

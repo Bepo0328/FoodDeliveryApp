@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
-import kr.co.bepo.fooddeliveryapp.data.repository.RestaurantRepository
-import kr.co.bepo.fooddeliveryapp.domain.model.CellType
+import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.RestaurantRepository
 import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 

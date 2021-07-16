@@ -9,6 +9,7 @@
     <string name="top_rate">별점 높은 순</string>
     <string name="initialize">초기화</string>
     <string name="no_image_found">No Image Found</string>
+    <string name="loading">로딩중...</string>
 
     <!-- Restaurant Item -->
     <string name="grad_format">%1$,.1f</string>
@@ -17,4 +18,9 @@
     <string name="min_price">" 최소주문 %1$,d원"</string>
     <string name="delivery_tip">배달팁 %1$,d원~%2$,d원</string>
 
+    <!-- Location -->
+    <string name="please_setup_your_location_permission">위치 권한을 설정해주세요!</string>
+    <string name="can_not_assigned_permission">권한을 받지 못했습니다.</string>
+    <string name="can_not_load_address_info">위치 정보를 불러올 수 없습니다.</string>
+    <string name="location_not_found">위치 정보가 없음</string>
 </resources>

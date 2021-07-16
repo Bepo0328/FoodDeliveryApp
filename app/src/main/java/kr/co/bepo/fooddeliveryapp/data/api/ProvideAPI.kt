@@ -1,18 +1,23 @@
 package kr.co.bepo.fooddeliveryapp.di
 
 import kr.co.bepo.fooddeliveryapp.BuildConfig
+import kr.co.bepo.fooddeliveryapp.data.api.MapApiService
+import kr.co.bepo.fooddeliveryapp.data.url.Url
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-fun provideRetrofit(
+fun provideMapApiService(retrofit: Retrofit): MapApiService =
+    retrofit.create(MapApiService::class.java)
+
+fun provideMapRetrofit(
     okHttpClient: OkHttpClient,
     gsonConverterFactory: GsonConverterFactory
 ): Retrofit =
     Retrofit.Builder()
-        .baseUrl("")
+        .baseUrl(Url.TMAP_URL)
         .addConverterFactory(gsonConverterFactory)
         .client(okHttpClient)
         .build()

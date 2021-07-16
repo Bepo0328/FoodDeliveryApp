@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/locationTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -30,9 +31,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/primaryColor"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:indeterminateTint="@color/primaryColor" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -176,5 +175,13 @@
         app:layout_constraintTop_toTopOf="@id/basketButtonContainer"
         app:layout_constraintVertical_bias="0.35"
         tools:text="1" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/loadingSuccessGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="tabLayout, filterScrollView, viewPager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
