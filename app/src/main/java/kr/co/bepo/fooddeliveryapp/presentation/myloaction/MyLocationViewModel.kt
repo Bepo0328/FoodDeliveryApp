@@ -4,15 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.map.MapRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class MyLocationViewModel(
     private val mapSearchInfoEntity: MapSearchInfoEntity,
-    private val mapRepository: MapRepository
+    private val mapRepository: MapRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
 
     val myLocationStateLiveData = MutableLiveData<MyLocationState>(MyLocationState.UnInitialized)
@@ -38,4 +41,16 @@ class MyLocationViewModel(
             )
         }
     }
+
+    fun confirmSelectLocation() = viewModelScope.launch {
+        when (val data = myLocationStateLiveData.value) {
+            is MyLocationState.Success -> {
+                userRepository.insertUserLocation(data.mapSearchInfoEntity.locationLatLngEntity)
+                myLocationStateLiveData.value = MyLocationState.Confirm(
+                    data.mapSearchInfoEntity
+                )
+            }
+        }
+    }
+
 }

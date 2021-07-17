@@ -83,10 +83,15 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:$glide_version")
     implementation("jp.wasabeef:glide-transformations:$glide_transformation_version")
 
-    //kakao map
+    // kakao map
     compile files('libs/libDaumMapAndroid.jar')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/libDaumMapAndroid.jar')
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

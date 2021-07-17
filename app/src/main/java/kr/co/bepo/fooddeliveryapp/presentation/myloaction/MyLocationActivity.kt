@@ -1,5 +1,6 @@
 package kr.co.bepo.fooddeliveryapp.presentation.myloaction
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -49,7 +50,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
         }
 
         confirmButton.setOnClickListener {
-
+            viewModel.confirmSelectLocation()
         }
 
         setUpKakaoMap()
@@ -65,7 +66,12 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
         when (it) {
             is MyLocationState.Loading -> handelLoadingState()
             is MyLocationState.Success -> handSuccessState(it)
-            is MyLocationState.Confirm -> handelConfirmState(it)
+            is MyLocationState.Confirm -> {
+                setResult(Activity.RESULT_OK, Intent().apply {
+                    putExtra(HomeViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
+                })
+                finish()
+            }
             is MyLocationState.Error -> Toast.makeText(this, it.messageId, Toast.LENGTH_SHORT)
                 .show()
             else -> Unit

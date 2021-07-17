@@ -4,19 +4,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.RestaurantRepository
 import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class RestaurantListViewModel(
     private val restaurantCategory: RestaurantCategory,
+    private var locationLatLng: LocationLatLngEntity,
     private val restaurantRepository: RestaurantRepository
 ) : BaseViewModel() {
 
     val restaurantListLiveData = MutableLiveData<List<RestaurantModel>>()
 
     override fun fetchData(): Job = viewModelScope.launch {
-        val restaurantList = restaurantRepository.getList(restaurantCategory)
+        val restaurantList = restaurantRepository.getList(restaurantCategory, locationLatLng)
         restaurantListLiveData.value = restaurantList.map {
             RestaurantModel(
                 id = it.id,
@@ -31,5 +33,10 @@ class RestaurantListViewModel(
                 deliveryTipRange = it.deliveryTipRange
             )
         }
+    }
+
+    fun setLocationLatLng(locationLatLng: LocationLatLngEntity) {
+        this.locationLatLng = locationLatLng
+        fetchData()
     }
 }

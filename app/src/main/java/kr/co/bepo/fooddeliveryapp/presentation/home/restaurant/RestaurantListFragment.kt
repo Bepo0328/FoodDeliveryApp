@@ -3,6 +3,7 @@ package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant
 import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentRestaurantListBinding
 import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
@@ -13,23 +14,33 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class RestaurantListFragment() :
+class RestaurantListFragment :
     BaseFragment<RestaurantListViewModel, FragmentRestaurantListBinding>() {
 
     companion object {
         private const val RESTAURANT_CATEGORY_KEY = "restaurantCategory"
+        private const val LOCATION_KEY = "location"
 
-        fun newInstance(restaurantCategory: RestaurantCategory): RestaurantListFragment =
+        fun newInstance(
+            restaurantCategory: RestaurantCategory,
+            locationLatLng: LocationLatLngEntity
+        ): RestaurantListFragment =
             RestaurantListFragment().apply {
                 arguments = bundleOf(
-                    RESTAURANT_CATEGORY_KEY to restaurantCategory
+                    RESTAURANT_CATEGORY_KEY to restaurantCategory,
+                    LOCATION_KEY to locationLatLng
                 )
             }
     }
 
     private val restaurantCategory by lazy { arguments?.getSerializable(RESTAURANT_CATEGORY_KEY) as RestaurantCategory }
-
-    override val viewModel: RestaurantListViewModel by viewModel { parametersOf(restaurantCategory) }
+    private val locationLatLng: LocationLatLngEntity by lazy { arguments?.getParcelable(LOCATION_KEY)!! }
+    override val viewModel: RestaurantListViewModel by viewModel {
+        parametersOf(
+            restaurantCategory,
+            locationLatLng
+        )
+    }
 
     override fun getViewBinding(): FragmentRestaurantListBinding =
         FragmentRestaurantListBinding.inflate(layoutInflater)

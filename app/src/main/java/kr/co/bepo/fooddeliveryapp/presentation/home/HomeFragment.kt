@@ -100,38 +100,55 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 binding.loadingSuccessGroup.toVisible()
                 binding.locationTitleTextView.text = it.mapSearchInfoEntity.fullAddress
                 initViewPager(it.mapSearchInfoEntity.locationLatLngEntity)
+                if (it.isLocationSame.not()) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.please_set_your_current_location,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.loadingSuccessGroup.toGone()
+                }
             }
             is HomeState.Error -> {
                 binding.locationLoading.toGone()
                 binding.loadingSuccessGroup.toGone()
-//                binding.locationTitleTextView.setText(R.string.location_not_found)
-//                binding.locationTitleTextView.setOnClickListener {
-//                    getMyLocation()
-//                }
+                binding.locationTitleTextView.setText(R.string.location_not_found)
                 Toast.makeText(requireContext(), it.messageId, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun initViewPager(locationLatLngEntity: LocationLatLngEntity) = with(binding) {
+    private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
         val restaurantCategories = RestaurantCategory.values()
 
         if (::viewPagerAdapter.isInitialized.not()) {
             val restaurantListFragmentList = restaurantCategories.map {
-                RestaurantListFragment.newInstance(it)
+                RestaurantListFragment.newInstance(it, locationLatLng)
             }
 
             viewPagerAdapter = RestaurantListFragmentPagerAdapter(
                 this@HomeFragment,
-                restaurantListFragmentList
+                restaurantListFragmentList,
+                locationLatLng
             )
+            viewPager.adapter = viewPagerAdapter
+            viewPager.offscreenPageLimit = restaurantCategories.size
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.setText(restaurantCategories[position].categoryNameId)
+            }.attach()
         }
 
-        viewPager.adapter = viewPagerAdapter
-        viewPager.offscreenPageLimit = restaurantCategories.size
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.setText(restaurantCategories[position].categoryNameId)
-        }.attach()
+        if (locationLatLng != viewPagerAdapter.locationLatLng) {
+            viewPagerAdapter.locationLatLng = locationLatLng
+
+            viewPagerAdapter.fragmentList.forEach {
+                try {
+                    it.viewModel.setLocationLatLng(locationLatLng)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
     private fun getMyLocation() {
@@ -175,7 +192,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         @SuppressLint("SetTextI18n")
         override fun onLocationChanged(location: Location) {
-//            binding.locationTitleTextView.text = "${location.latitude}, ${location.longitude}"
             viewModel.loadReverseGeoInformation(
                 LocationLatLngEntity(
                     latitude = location.latitude,
@@ -185,4 +201,5 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             removeLocationListener()
         }
     }
+
 }

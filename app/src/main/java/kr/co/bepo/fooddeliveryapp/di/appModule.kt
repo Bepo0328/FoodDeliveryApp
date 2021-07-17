@@ -1,11 +1,14 @@
 package kr.co.bepo.fooddeliveryapp.di
 
 import kotlinx.coroutines.Dispatchers
+import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.map.DefaultMapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.map.MapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.DefaultRestaurantRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.RestaurantRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.user.DefaultUserRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.home.HomeViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListViewModel
@@ -23,13 +26,17 @@ val appModule = module {
 }
 
 val dataModule = module {
+    single { provideMapApiService(get()) }
+    single { provideMapRetrofit(get(), get()) }
     single { provideGsonConvertFactory() }
     single { buildOkHttpClient() }
-    single { provideMapRetrofit(get(), get()) }
-    single { provideMapApiService(get()) }
 
-    single<RestaurantRepository> { DefaultRestaurantRepository(get(), get()) }
+    single { provideDB(androidApplication()) }
+    single { provideLocationDao(get()) }
+
+    single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<MapRepository> { DefaultMapRepository(get(), get()) }
+    single<UserRepository> { DefaultUserRepository(get(), get()) }
 }
 
 val domainModule = module {
@@ -37,17 +44,19 @@ val domainModule = module {
 }
 
 val presentModule = module {
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { MyViewModel() }
-    viewModel { (restaurantCategory: RestaurantCategory) ->
+    viewModel { (restaurantCategory: RestaurantCategory, locationLatLng: LocationLatLngEntity) ->
         RestaurantListViewModel(
             restaurantCategory,
+            locationLatLng,
             get()
         )
     }
     viewModel { (mapSearchInfoEntity: MapSearchInfoEntity) ->
         MyLocationViewModel(
             mapSearchInfoEntity,
+            get(),
             get()
         )
     }
