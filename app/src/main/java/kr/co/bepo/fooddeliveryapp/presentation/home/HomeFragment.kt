@@ -2,6 +2,7 @@ package kr.co.bepo.fooddeliveryapp.presentation.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.location.Location
 import android.location.LocationListener
@@ -11,12 +12,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
+import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentHomeBinding
 import kr.co.bepo.fooddeliveryapp.extensions.toGone
 import kr.co.bepo.fooddeliveryapp.extensions.toVisible
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListFragment
+import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationActivity
 import kr.co.bepo.fooddeliveryapp.widget.adapter.RestaurantListFragmentPagerAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -35,10 +38,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         FragmentHomeBinding.inflate(layoutInflater)
 
     private lateinit var viewPagerAdapter: RestaurantListFragmentPagerAdapter
-
     private lateinit var locationManager: LocationManager
-
     private lateinit var myLocationListener: MyLocationListener
+
+    private val changeLocationLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.getParcelableExtra<MapSearchInfoEntity>(HomeViewModel.MY_LOCATION_KEY)
+                    ?.let { myLocationInfo ->
+                        viewModel.loadReverseGeoInformation(myLocationInfo.locationLatLngEntity)
+                    }
+            }
+        }
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -63,6 +74,19 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
 
+    override fun initViews() = with(binding) {
+        locationTitleTextView.setOnClickListener {
+            viewModel.getMapSearchInfo()?.let { mapInfo ->
+                changeLocationLauncher.launch(
+                    MyLocationActivity.newIntent(
+                        requireContext(),
+                        mapInfo
+                    )
+                )
+            }
+        }
+    }
+
     override fun observeData() = viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
         when (it) {
             is HomeState.UnInitialized ->
@@ -80,10 +104,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             is HomeState.Error -> {
                 binding.locationLoading.toGone()
                 binding.loadingSuccessGroup.toGone()
-                binding.locationTitleTextView.setText(R.string.location_not_found)
-                binding.locationTitleTextView.setOnClickListener {
-                    getMyLocation()
-                }
+//                binding.locationTitleTextView.setText(R.string.location_not_found)
+//                binding.locationTitleTextView.setOnClickListener {
+//                    getMyLocation()
+//                }
                 Toast.makeText(requireContext(), it.messageId, Toast.LENGTH_SHORT).show()
             }
         }

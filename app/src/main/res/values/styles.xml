@@ -7,13 +7,11 @@
     </style>
 
     <style name="Widget.FoodDeliveryApp.Toolbar.WithArrow" parent="Widget.FoodDeliveryApp.Toolbar">
-        <item name="android:title">@null</item>
-        <item name="android:navigationIcon">@drawable/ic_arrow_back</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back</item>
     </style>
 
     <style name="Widget.FoodDeliveryApp.Toolbar.WithClose" parent="Widget.FoodDeliveryApp.Toolbar">
-        <item name="android:title">@null</item>
-        <item name="android:navigationIcon">@drawable/ic_close</item>
+        <item name="navigationIcon">@drawable/ic_close</item>
     </style>
 
     <style name="Widget.FoodDeliveryApp.Chip" parent="Widget.MaterialComponents.Chip.Choice">

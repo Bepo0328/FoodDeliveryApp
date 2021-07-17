@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Kakao Api Key-->
+    <string name="kakao_api_key">input your api key</string>
+
+</resources>

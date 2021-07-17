@@ -25,7 +25,7 @@ class FoodDeliveryAppApplication : Application() {
                 else Level.NONE
             )
             androidContext(this@FoodDeliveryAppApplication)
-            modules(appModule + dataModule + domainModule + viewModule + utilModule)
+            modules(appModule + dataModule + domainModule + presentModule + utilModule)
         }
     }
 
