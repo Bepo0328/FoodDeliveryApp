@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="all">전체</string>
+
+    <string name="korean_food">한식</string>
+    <string name="dumpling_food">분식</string>
+    <string name="japanese_food">돈까스•회•일식</string>
+    <string name="chicken">치킨</string>
+    <string name="pizza">피자</string>
+    <string name="asian_europe_food">아시안•양식</string>
+    <string name="chinese_food">중식</string>
+    <string name="jokbal_bossam">족발•보쌈</string>
+    <string name="midnight_food">야식</string>
+    <string name="jjim_tang">찜•탕</string>
+    <string name="packed_lunch">도시락</string>
+    <string name="cafe_dessert">카페•디저트</string>
+    <string name="fast_food">패스트푸드</string>
+
     <string name="all_type">식당</string>
+    <string name="korean_food_type">한식</string>
+    <string name="dumpling_food_type">분식</string>
+    <string name="japanese_food_type">돈까스;회;일식</string>
+    <string name="chicken_type">치킨</string>
+    <string name="pizza_type">피자</string>
+    <string name="asian_europe_food_type">아시안;양식</string>
+    <string name="chinese_food_type">중식</string>
+    <string name="jokbal_bossam_type">족발;보쌈</string>
+    <string name="midnight_food_type">야식</string>
+    <string name="jjim_tang_type">찜;탕</string>
+    <string name="packed_lunch_type">도시락</string>
+    <string name="cafe_dessert_type">카페;디저트</string>
+    <string name="fast_food_type">패스트푸드</string>
+
 </resources>

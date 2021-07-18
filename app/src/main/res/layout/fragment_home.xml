@@ -41,7 +41,11 @@
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabMaxWidth="0dp"
+        app:tabMode="auto" />
 
     <View
         android:layout_width="0dp"
@@ -132,7 +136,9 @@
         android:id="@+id/basketGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="basketButtonContainer, basketCountTextView" />
+        android:visibility="gone"
+        app:constraint_referenced_ids="basketButtonContainer, basketCountTextView"
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/basketButtonContainer"
@@ -181,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        tools:visibility="visible"
-        app:constraint_referenced_ids="tabLayout, filterScrollView, viewPager" />
+        app:constraint_referenced_ids="tabLayout, filterScrollView, viewPager"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
