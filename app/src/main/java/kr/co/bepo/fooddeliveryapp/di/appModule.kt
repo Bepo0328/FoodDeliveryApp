@@ -3,6 +3,7 @@ package kr.co.bepo.fooddeliveryapp.di
 import kotlinx.coroutines.Dispatchers
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
+import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.map.DefaultMapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.map.MapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.DefaultRestaurantRepository
@@ -12,6 +13,7 @@ import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.home.HomeViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListViewModel
+import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.my.MyViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.DefaultResourcesProvider
@@ -60,6 +62,7 @@ val presentModule = module {
             get()
         )
     }
+    viewModel { (restaurantEntity: RestaurantEntity) -> RestaurantDetailViewModel(restaurantEntity) }
 }
 
 val utilModule = module {

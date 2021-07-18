@@ -1,12 +1,12 @@
 package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant
 
 import android.util.Log
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentRestaurantListBinding
 import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
+import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailActivity
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.ModelRecyclerAdapter
 import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.RestaurantListListener
@@ -18,8 +18,9 @@ class RestaurantListFragment :
     BaseFragment<RestaurantListViewModel, FragmentRestaurantListBinding>() {
 
     companion object {
-        private const val RESTAURANT_CATEGORY_KEY = "restaurantCategory"
-        private const val LOCATION_KEY = "location"
+        const val RESTAURANT_CATEGORY_KEY = "restaurantCategory"
+        const val LOCATION_KEY = "location"
+        const val RESTAURANT_KEY = "Restaurant"
 
         fun newInstance(
             restaurantCategory: RestaurantCategory,
@@ -54,7 +55,12 @@ class RestaurantListFragment :
             resourcesProvider,
             adapterListener = object : RestaurantListListener {
                 override fun onClickItem(model: RestaurantModel) {
-                    Toast.makeText(requireContext(), "$model", Toast.LENGTH_SHORT).show()
+                    startActivity(
+                        RestaurantDetailActivity.newIntent(
+                            requireContext(),
+                            model.toEntity()
+                        )
+                    )
                 }
             }
         )

@@ -42,7 +42,8 @@ class DefaultRestaurantRepository(
                     reviewCount = (0 until 200).random(),
                     deliveryTimeRange = Pair((0..20).random(), (40..60).random()),
                     minPrice = (5000..20000).random(),
-                    deliveryTipRange = Pair((0..1000).random(), (2000..4000).random())
+                    deliveryTipRange = Pair((0..1000).random(), (2000..4000).random()),
+                    restaurantTelNumber = poi.telNo
                 )
             } ?: listOf()
         } else {

@@ -9,7 +9,6 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.isGone
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
@@ -99,12 +98,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     chipDefault.isChecked = true
 
                 }
-                R.id.chipFastDelivery ->  {
+                R.id.chipFastDelivery -> {
                     chipInitialize.toVisible()
                     changeRestaurantOrder(RestaurantOrder.FAST_DELIVERY)
 
                 }
-                R.id.chipLowDeliveryTip ->  {
+                R.id.chipLowDeliveryTip -> {
                     chipInitialize.toVisible()
                     changeRestaurantOrder(RestaurantOrder.LOW_DELIVERY_TIP)
 

@@ -15,5 +15,6 @@ data class RestaurantEntity(
     val reviewCount: Int,
     val deliveryTimeRange: Pair<Int, Int>,
     val minPrice: Int,
-    val deliveryTipRange: Pair<Int, Int>
+    val deliveryTipRange: Pair<Int, Int>,
+    val restaurantTelNumber: String?
 ) : Entity, Parcelable
