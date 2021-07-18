@@ -21,9 +21,7 @@
         <item name="rippleColor">@android:color/transparent</item>
         <item name="chipStrokeColor">@color/brown</item>
         <item name="chipBackgroundColor">@color/background_filter_chip_state_list</item>
-        <item name="chipIconSize">12dp</item>
-        <item name="chipIconEnabled">true</item>
-        <item name="chipIconTint">@color/icon_filter_chip_state_list_reset</item>
+        <item name="chipIconTint">@color/icon_filter_chip_state_list</item>
     </style>
 
 </resources>

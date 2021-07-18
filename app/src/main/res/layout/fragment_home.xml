@@ -65,10 +65,10 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/filterChipGroup"
+            android:id="@+id/orderChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="12dp"
+            android:paddingHorizontal="20dp"
             app:checkedChip="@id/chipDefault"
             app:chipSpacingHorizontal="4dp"
             app:chipSpacingVertical="6dp"
@@ -82,21 +82,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/initialize"
-                android:visibility="gone" />
+                android:textColor="@color/brown"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_refresh"
+                app:chipIconEnabled="true"
+                app:chipIconSize="14dp"
+                app:chipIconTint="@color/brown"
+                tools:visibility="visible" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFastDelivery"
                 style="@style/Widget.FoodDeliveryApp.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fast_delivery" />
+                android:text="@string/fast_delivery"
+                app:chipIcon="@drawable/ic_fast_clock"
+                app:chipIconEnabled="true"
+                app:chipIconSize="20dp"
+                app:chipIconTint="@color/icon_filter_chip_state_list_delivery_fast"
+                app:chipStartPadding="12dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipLowDeliveryTip"
                 style="@style/Widget.FoodDeliveryApp.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/low_delivery_tip" />
+                android:text="@string/low_delivery_tip"
+                app:chipIcon="@drawable/ic_down"
+                app:chipIconEnabled="true"
+                app:chipIconSize="14dp"
+                app:chipIconTint="@color/icon_filter_chip_state_list_delivery_tip"
+                app:chipStartPadding="12dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipDefault"

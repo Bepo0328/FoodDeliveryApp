@@ -9,6 +9,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isGone
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
@@ -19,6 +20,7 @@ import kr.co.bepo.fooddeliveryapp.extensions.toVisible
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListFragment
+import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantOrder
 import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationActivity
 import kr.co.bepo.fooddeliveryapp.widget.adapter.RestaurantListFragmentPagerAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -85,7 +87,48 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 )
             }
         }
+
+        orderChipGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.chipDefault -> {
+                    chipInitialize.toGone()
+                    changeRestaurantOrder(RestaurantOrder.DEFAULT)
+
+                }
+                R.id.chipInitialize -> {
+                    chipDefault.isChecked = true
+
+                }
+                R.id.chipFastDelivery ->  {
+                    chipInitialize.toVisible()
+                    changeRestaurantOrder(RestaurantOrder.FAST_DELIVERY)
+
+                }
+                R.id.chipLowDeliveryTip ->  {
+                    chipInitialize.toVisible()
+                    changeRestaurantOrder(RestaurantOrder.LOW_DELIVERY_TIP)
+
+                }
+                R.id.chipManyOrder -> {
+                    chipInitialize.toVisible()
+                    changeRestaurantOrder(RestaurantOrder.MANY_ORDER)
+
+                }
+                R.id.chipTopRate -> {
+                    chipInitialize.toVisible()
+                    changeRestaurantOrder(RestaurantOrder.TOP_RATE)
+
+                }
+            }
+        }
     }
+
+    private fun changeRestaurantOrder(order: RestaurantOrder) {
+        viewPagerAdapter.fragmentList.forEach {
+            it.viewModel.setRestaurantOrder(order)
+        }
+    }
+
 
     override fun observeData() = viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
         when (it) {
