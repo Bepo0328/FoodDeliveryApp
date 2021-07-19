@@ -30,21 +30,4 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() = with(binding) {
         bottomNavigationView.setupWithNavController(navigationController)
     }
-
-//    @RequiresApi(Build.VERSION_CODES.P)
-//    private fun getKeyHash() {
-//        try {
-//            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
-//            val signatures = info.signingInfo.apkContentsSigners
-//            val md = MessageDigest.getInstance("SHA")
-//            for (signature in signatures) {
-//                val md: MessageDigest = MessageDigest.getInstance("SHA")
-//                md.update(signature.toByteArray())
-//                val key = String(Base64.encode(md.digest(), 0))
-//                Log.d("Hash key", "Hash Key: $key")
-//            }
-//        } catch(e: Exception) {
-//            Log.e("Hash key","name not found: ${e.toString()}")
-//        }
-//    }
 }

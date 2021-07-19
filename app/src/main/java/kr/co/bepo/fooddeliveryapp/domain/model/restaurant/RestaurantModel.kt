@@ -1,6 +1,8 @@
-package kr.co.bepo.fooddeliveryapp.domain.model
+package kr.co.bepo.fooddeliveryapp.domain.model.restaurant
 
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
+import kr.co.bepo.fooddeliveryapp.domain.model.CellType
+import kr.co.bepo.fooddeliveryapp.domain.model.Model
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 
 data class RestaurantModel(

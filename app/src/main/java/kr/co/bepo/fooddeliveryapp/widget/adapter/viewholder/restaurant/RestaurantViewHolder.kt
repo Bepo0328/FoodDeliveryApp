@@ -2,7 +2,7 @@ package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant
 
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderRestaurantBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
+import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.extensions.clear
 import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.core.os.bundleOf
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentRestaurantListBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.RestaurantModel
+import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.RestaurantModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailActivity
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider

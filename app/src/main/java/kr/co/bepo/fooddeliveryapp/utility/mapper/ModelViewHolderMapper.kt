@@ -3,14 +3,17 @@ package kr.co.bepo.fooddeliveryapp.utility.mapper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderEmptyBinding
+import kr.co.bepo.fooddeliveryapp.databinding.ViewholderFoodMenuBinding
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderRestaurantBinding
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType
 import kr.co.bepo.fooddeliveryapp.domain.model.Model
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
+import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.menu.RestaurantMenuListViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.EmptyViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.RestaurantViewHolder
+import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.food.FoodMenuViewHolder
 
 object ModelViewHolderMapper {
 
@@ -30,6 +33,11 @@ object ModelViewHolderMapper {
             )
             CellType.RESTAURANT_CELL -> RestaurantViewHolder(
                 ViewholderRestaurantBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+            CellType.FOOD_CELL -> FoodMenuViewHolder(
+                ViewholderFoodMenuBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )

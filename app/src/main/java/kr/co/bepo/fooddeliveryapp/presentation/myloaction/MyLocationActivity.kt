@@ -64,8 +64,8 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
 
     override fun observeData() = viewModel.myLocationStateLiveData.observe(this) {
         when (it) {
-            is MyLocationState.Loading -> handelLoadingState()
-            is MyLocationState.Success -> handSuccessState(it)
+            is MyLocationState.Loading -> handleLoadingState()
+            is MyLocationState.Success -> handleSuccessState(it)
             is MyLocationState.Confirm -> {
                 setResult(Activity.RESULT_OK, Intent().apply {
                     putExtra(HomeViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
@@ -78,12 +78,12 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
         }
     }
 
-    private fun handelLoadingState() = with(binding) {
+    private fun handleLoadingState() = with(binding) {
         locationLoading.toVisible()
         locationTitleTextView.text = getString(R.string.loading)
     }
 
-    private fun handSuccessState(state: MyLocationState.Success) = with(binding) {
+    private fun handleSuccessState(state: MyLocationState.Success) = with(binding) {
         val mapSearchInfo = state.mapSearchInfoEntity
         locationLoading.toGone()
         locationTitleTextView.text = mapSearchInfo.fullAddress
@@ -97,10 +97,6 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
             isMapInitialized = true
         }
         kakaoMap.setMapViewEventListener(this@MyLocationActivity)
-    }
-
-    private fun handelConfirmState(state: MyLocationState.Confirm) = with(binding) {
-
     }
 
     override fun onMapViewInitialized(p0: MapView?) {}

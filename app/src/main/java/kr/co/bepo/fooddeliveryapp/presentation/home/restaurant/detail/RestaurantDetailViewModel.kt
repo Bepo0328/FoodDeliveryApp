@@ -5,11 +5,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
+import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class RestaurantDetailViewModel(
     private val restaurantEntity: RestaurantEntity,
+    private val restaurantFoodRepository: RestaurantFoodRepository,
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
@@ -18,11 +20,11 @@ class RestaurantDetailViewModel(
 
     override fun fetchData(): Job = viewModelScope.launch {
         restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
-        val isLiked =
-            userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
-
+        val isLiked = userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
+        val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId)
         restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity,
+            restaurantFoodList = foods,
             isLiked = isLiked
         )
     }
