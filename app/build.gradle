@@ -84,7 +84,6 @@ dependencies {
     implementation("jp.wasabeef:glide-transformations:$glide_transformation_version")
 
     // kakao map
-    compile files('libs/libDaumMapAndroid.jar')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/libDaumMapAndroid.jar')
 

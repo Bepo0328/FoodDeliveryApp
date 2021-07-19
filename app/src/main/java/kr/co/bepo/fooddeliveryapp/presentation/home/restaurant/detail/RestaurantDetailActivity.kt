@@ -2,8 +2,10 @@ package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import com.google.android.material.appbar.AppBarLayout
@@ -67,7 +69,14 @@ class RestaurantDetailActivity :
         toolbar.setNavigationOnClickListener { finish() }
 
         callButton.setOnClickListener {
-
+            viewModel.getRestaurantTelNumber()?.let { telNumber ->
+                if (telNumber.isNotEmpty()) {
+                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$telNumber"))
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this@RestaurantDetailActivity, "전화 번호가 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         likeButton.setOnClickListener {
 
