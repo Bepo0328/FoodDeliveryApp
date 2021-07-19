@@ -35,6 +35,7 @@
     <string name="tip">배달팁</string>
     <string name="delivery_expected_time">%1$d~%2$d분 소요 예정</string>
     <string name="delivery_tip_range">%1$,d원 ~ %2$,d원</string>
+    <string name="basket_count">%d</string>
 
     <!-- Restaurant Menu -->
     <string name="price">%1$,d원</string>

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
+import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
@@ -20,11 +21,14 @@ class RestaurantDetailViewModel(
 
     override fun fetchData(): Job = viewModelScope.launch {
         restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
-        val isLiked = userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
+        val isLiked =
+            userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
         val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId)
+        val foodMenuListInBasket = restaurantFoodRepository.getAllFoodMenuListInBasket()
         restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity,
             restaurantFoodList = foods,
+            foodMenuListInBasket = foodMenuListInBasket,
             isLiked = isLiked
         )
     }
@@ -56,6 +60,43 @@ class RestaurantDetailViewModel(
                     restaurantDetailStateLiveData.value = data.copy(isLiked = true)
                 }
             }
+        }
+    }
+
+    fun notifyFoodMenuListInBasket(restaurantFoodEntity: RestaurantFoodEntity) =
+        viewModelScope.launch {
+            when (val data = restaurantDetailStateLiveData.value) {
+                is RestaurantDetailState.Success -> {
+                    restaurantDetailStateLiveData.value = data.copy(
+                        foodMenuListInBasket = data.foodMenuListInBasket?.toMutableList()?.apply {
+                            add(restaurantFoodEntity)
+                        }
+                    )
+                }
+                else -> Unit
+            }
+        }
+
+    fun notifyClearNeedAlertInBasket(clearNeed: Boolean, afterAction: () -> Unit) {
+        when (val data = restaurantDetailStateLiveData.value) {
+            is RestaurantDetailState.Success -> {
+                restaurantDetailStateLiveData.value = data.copy(
+                    isClearNeedInBasketAndAction = Pair(clearNeed, afterAction)
+                )
+            }
+            else -> Unit
+        }
+    }
+
+    fun notifyClearBasket() = viewModelScope.launch {
+        when (val data = restaurantDetailStateLiveData.value) {
+            is RestaurantDetailState.Success -> {
+                restaurantDetailStateLiveData.value = data.copy(
+                    foodMenuListInBasket = listOf(),
+                    isClearNeedInBasketAndAction = Pair(false, {})
+                )
+            }
+            else -> Unit
         }
     }
 }

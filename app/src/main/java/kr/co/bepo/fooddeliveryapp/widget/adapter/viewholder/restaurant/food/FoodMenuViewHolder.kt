@@ -9,6 +9,7 @@ import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
+import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.food.FoodMenuListListener
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 
 class FoodMenuViewHolder(
@@ -29,8 +30,13 @@ class FoodMenuViewHolder(
         priceTextView.text = resourcesProvider.getString(R.string.price, model.price)
     }
 
-    override fun bindViews(model: FoodModel, adapterListener: AdapterListener) {
+    override fun bindViews(model: FoodModel, adapterListener: AdapterListener) = with(binding) {
+        if (adapterListener is FoodMenuListListener) {
+            root.setOnClickListener {
 
+                adapterListener.onClickItem(model)
+            }
+        }
     }
 
 
