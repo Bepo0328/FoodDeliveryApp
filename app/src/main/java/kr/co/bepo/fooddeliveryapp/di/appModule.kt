@@ -35,10 +35,11 @@ val dataModule = module {
 
     single { provideDB(androidApplication()) }
     single { provideLocationDao(get()) }
+    single { provideRestaurantDao(get()) }
 
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<MapRepository> { DefaultMapRepository(get(), get()) }
-    single<UserRepository> { DefaultUserRepository(get(), get()) }
+    single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
 }
 
 val domainModule = module {
@@ -62,7 +63,7 @@ val presentModule = module {
             get()
         )
     }
-    viewModel { (restaurantEntity: RestaurantEntity) -> RestaurantDetailViewModel(restaurantEntity) }
+    viewModel { (restaurantEntity: RestaurantEntity) -> RestaurantDetailViewModel(restaurantEntity, get()) }
 }
 
 val utilModule = module {
