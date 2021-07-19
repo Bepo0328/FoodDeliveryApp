@@ -1,10 +1,9 @@
 package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail
 
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -74,7 +73,11 @@ class RestaurantDetailActivity :
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$telNumber"))
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@RestaurantDetailActivity, "전화 번호가 없습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@RestaurantDetailActivity,
+                        "전화 번호가 없습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -82,7 +85,19 @@ class RestaurantDetailActivity :
             viewModel.toggleLikeRestaurant()
         }
         shareButton.setOnClickListener {
-
+            viewModel.getRestaurantInfo()?.let { restaurantInfo ->
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = MIMETYPE_TEXT_PLAIN
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "음식점 이름 : ${restaurantInfo.restaurantTitle}\n" +
+                                "평점 : ${restaurantInfo.grade}\n" +
+                                "연락처 : ${restaurantInfo.restaurantTelNumber}"
+                    )
+                    Intent.createChooser(this, "친구에게 공유하기")
+                }
+                startActivity(intent)
+            }
         }
     }
 
