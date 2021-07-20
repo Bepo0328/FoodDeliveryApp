@@ -5,6 +5,7 @@ import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
+import kr.co.bepo.fooddeliveryapp.data.preference.AppPreferenceManager
 import kr.co.bepo.fooddeliveryapp.data.repository.map.DefaultMapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.map.MapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.DefaultRestaurantRepository
@@ -50,6 +51,8 @@ val dataModule = module {
     single { provideRestaurantDao(get()) }
     single { provideFoodMenuBasketDao(get()) }
 
+    single { AppPreferenceManager(androidApplication()) }
+
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
@@ -64,7 +67,7 @@ val domainModule = module {
 
 val presentModule = module {
     viewModel { HomeViewModel(get(), get(), get()) }
-    viewModel { MyViewModel() }
+    viewModel { MyViewModel(get()) }
     viewModel { (restaurantCategory: RestaurantCategory, locationLatLng: LocationLatLngEntity) ->
         RestaurantListViewModel(
             restaurantCategory,
