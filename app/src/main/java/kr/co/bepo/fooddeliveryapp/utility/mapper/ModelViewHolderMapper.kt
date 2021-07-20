@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderEmptyBinding
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderFoodMenuBinding
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderRestaurantBinding
+import kr.co.bepo.fooddeliveryapp.databinding.ViewholderReviewBinding
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType
 import kr.co.bepo.fooddeliveryapp.domain.model.Model
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
@@ -14,6 +15,7 @@ import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.EmptyViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.RestaurantViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.food.FoodMenuViewHolder
+import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.review.ReviewViewHolder
 
 object ModelViewHolderMapper {
 
@@ -38,6 +40,11 @@ object ModelViewHolderMapper {
             )
             CellType.FOOD_CELL -> FoodMenuViewHolder(
                 ViewholderFoodMenuBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+            CellType.REVIEW_CELL -> ReviewViewHolder(
+                ViewholderReviewBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )

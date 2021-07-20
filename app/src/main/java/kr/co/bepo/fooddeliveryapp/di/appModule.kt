@@ -11,6 +11,8 @@ import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.DefaultRestaurantRe
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.RestaurantRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.DefaultRestaurantFoodRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.review.DefaultRestaurantReviewRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.review.RestaurantReviewRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.user.DefaultUserRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.user.UserRepository
 import kr.co.bepo.fooddeliveryapp.presentation.home.HomeViewModel
@@ -52,6 +54,7 @@ val dataModule = module {
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
+    single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
 
 }
 
@@ -83,14 +86,14 @@ val presentModule = module {
             get()
         )
     }
-    viewModel { (restaurantid: Long, restaurantFoodList: List<RestaurantFoodEntity>) ->
+    viewModel { (restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>) ->
         RestaurantMenuListViewModel(
-            restaurantid,
+            restaurantId,
             restaurantFoodList,
             get()
         )
     }
-    viewModel { RestaurantReviewListViewModel() }
+    viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
 }
 
 val utilModule = module {
