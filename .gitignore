@@ -48,7 +48,7 @@ captures/
 *.ipr
 *~
 *.swp
-gradle.properties
+.gradle.properties
 
 # Keystore files
 *.jks
@@ -56,6 +56,9 @@ gradle.properties
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+
+# API Key
+/app/src/main/res/values/api_key
 
 # Android Patch
 gen-external-apklibs
