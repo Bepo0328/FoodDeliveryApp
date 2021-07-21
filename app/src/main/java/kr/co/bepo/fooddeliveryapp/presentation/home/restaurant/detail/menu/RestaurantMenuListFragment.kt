@@ -9,7 +9,7 @@ import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.ModelRecyclerAdapter
-import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.food.FoodMenuListListener
+import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.FoodMenuListListener
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/home_dest">
+    app:startDestination="@id/menu_home_dest">
 
     <fragment
-        android:id="@+id/home_dest"
+        android:id="@+id/menu_home_dest"
         android:name="kr.co.bepo.fooddeliveryapp.presentation.home.HomeFragment"
-        android:label="@string/home"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/to_my_action"
-            app:destination="@id/my_dest" />
-
-    </fragment>
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/my_dest"
+        android:id="@+id/menu_like_dest"
+        android:name="kr.co.bepo.fooddeliveryapp.presentation.like.RestaurantLikeListFragment"
+        android:label="@string/menu_like"
+        tools:layout="@layout/fragment_restaurant_like_list" />
+
+    <fragment
+        android:id="@+id/menu_my_dest"
         android:name="kr.co.bepo.fooddeliveryapp.presentation.my.MyFragment"
-        android:label="@string/my"
+        android:label="@string/menu_my"
         tools:layout="@layout/fragment_my" />
 </navigation>

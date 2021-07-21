@@ -1,8 +1,6 @@
 <resources>
 
     <string name="app_name">FoodDeliveryApp</string>
-    <string name="my">My</string>
-    <string name="home">홈</string>
     <string name="fast_delivery">배달 빠른 순</string>
     <string name="low_delivery_tip">배달 팁 낮은 순</string>
     <string name="default_order">기본 순</string>
@@ -11,6 +9,11 @@
     <string name="initialize">초기화</string>
     <string name="no_image_found">No Image Found</string>
     <string name="loading">로딩중...</string>
+
+    <!-- Navigation -->
+    <string name="menu_my">My</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_like">찜</string>
 
     <!-- Restaurant Item -->
     <string name="grad_format">%1$,.1f</string>
@@ -44,5 +47,9 @@
     <string name="logout">로그아웃</string>
     <string name="empty_orders_text">주문 리스트가 존재하지 않습니다.</string>
     <string name="google_login_required">구글 로그인이 필요합니다.</string>
+
+    <!-- Fragment Restaurant Like List  -->
+    <string name="restaurant_like_list">찜 리스트</string>
+    <string name="empty_restaurant_like_text">찜한 내역이 존재하지 않습니다.</string>
 
 </resources>

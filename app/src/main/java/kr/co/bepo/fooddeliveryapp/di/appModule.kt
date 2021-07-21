@@ -22,6 +22,7 @@ import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListVie
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.menu.RestaurantMenuListViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.review.RestaurantReviewListViewModel
+import kr.co.bepo.fooddeliveryapp.presentation.like.RestaurantLikeListViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.my.MyViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.DefaultResourcesProvider
@@ -97,6 +98,7 @@ val presentModule = module {
         )
     }
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
+    viewModel { RestaurantLikeListViewModel(get()) }
 }
 
 val utilModule = module {

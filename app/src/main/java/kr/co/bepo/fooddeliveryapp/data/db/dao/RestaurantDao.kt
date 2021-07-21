@@ -12,6 +12,9 @@ interface RestaurantDao {
     @Query("SELECT * FROM RestaurantEntity WHERE restaurantTitle=:title")
     suspend fun get(title: String): RestaurantEntity?
 
+    @Query("SELECT * FROM RestaurantEntity")
+    suspend fun getAll(): List<RestaurantEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(restaurantEntity: RestaurantEntity)
 

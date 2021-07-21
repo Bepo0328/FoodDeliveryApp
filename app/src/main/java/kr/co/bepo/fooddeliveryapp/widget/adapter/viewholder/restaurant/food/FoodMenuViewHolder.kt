@@ -9,7 +9,7 @@ import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
-import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.food.FoodMenuListListener
+import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.FoodMenuListListener
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 
 class FoodMenuViewHolder(
