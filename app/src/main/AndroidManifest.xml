@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".presentation.myloaction.MyLocationActivity" />
         <activity android:name=".presentation.home.restaurant.detail.RestaurantDetailActivity"/>
+        <activity android:name=".presentation.order.OrderMenuListActivity"/>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_api_key" />

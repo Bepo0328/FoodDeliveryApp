@@ -25,6 +25,8 @@ import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.review.Res
 import kr.co.bepo.fooddeliveryapp.presentation.like.RestaurantLikeListViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.my.MyViewModel
 import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationViewModel
+import kr.co.bepo.fooddeliveryapp.presentation.order.OrderMenuListViewModel
+import kr.co.bepo.fooddeliveryapp.utility.event.MenuChangeEventBus
 import kr.co.bepo.fooddeliveryapp.utility.provider.DefaultResourcesProvider
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import org.koin.android.ext.koin.androidApplication
@@ -99,8 +101,10 @@ val presentModule = module {
     }
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
     viewModel { RestaurantLikeListViewModel(get()) }
+    viewModel { OrderMenuListViewModel(get()) }
 }
 
 val utilModule = module {
     single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
+    single { MenuChangeEventBus() }
 }

@@ -1,7 +1,5 @@
-package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.review
+package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.review
 
-import androidx.core.content.ContextCompat
-import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderReviewBinding
 import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review.ReviewModel
 import kr.co.bepo.fooddeliveryapp.extensions.clear

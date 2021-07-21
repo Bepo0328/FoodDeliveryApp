@@ -1,4 +1,4 @@
-package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.food
+package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.food
 
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import kr.co.bepo.fooddeliveryapp.R

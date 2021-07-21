@@ -3,14 +3,15 @@ package kr.co.bepo.fooddeliveryapp.presentation.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
@@ -21,7 +22,10 @@ import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantCategory
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantOrder
+import kr.co.bepo.fooddeliveryapp.presentation.main.MainActivity
+import kr.co.bepo.fooddeliveryapp.presentation.main.MainTabMenu
 import kr.co.bepo.fooddeliveryapp.presentation.myloaction.MyLocationActivity
+import kr.co.bepo.fooddeliveryapp.presentation.order.OrderMenuListActivity
 import kr.co.bepo.fooddeliveryapp.widget.adapter.RestaurantListFragmentPagerAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,6 +46,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private lateinit var viewPagerAdapter: RestaurantListFragmentPagerAdapter
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
+
+    private var isShowBasket: Boolean = false
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private val changeLocationLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -136,10 +143,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 is HomeState.UnInitialized ->
                     getMyLocation()
                 is HomeState.Loading -> {
+                    binding.basketGroup.toGone()
                     binding.locationLoading.toVisible()
                     binding.locationTitleTextView.text = getString(R.string.loading)
                 }
                 is HomeState.Success -> {
+                    if (isShowBasket) {
+                        binding.basketGroup.toVisible()
+                    }
                     binding.locationLoading.toGone()
                     binding.loadingSuccessGroup.toVisible()
                     binding.locationTitleTextView.text = it.mapSearchInfoEntity.fullAddress
@@ -154,6 +165,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     }
                 }
                 is HomeState.Error -> {
+                    binding.basketGroup.toGone()
                     binding.locationLoading.toGone()
                     binding.loadingSuccessGroup.toGone()
                     binding.locationTitleTextView.setText(R.string.location_not_found)
@@ -164,15 +176,37 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.basketGroup.toVisible()
+                isShowBasket = true
                 binding.basketCountTextView.text = getString(R.string.basket_count, it.size)
                 binding.basketButton.setOnClickListener {
-                    // TODO 주문하기 화면으로 이동 or 로그인
+                    if (firebaseAuth.currentUser == null) {
+                        alertLoginNeed {
+                            (requireActivity() as MainActivity).goToTab(MainTabMenu.MY)
+                        }
+                    } else {
+                        startActivity(OrderMenuListActivity.newIntent(requireContext()))
+                    }
                 }
             } else {
+                isShowBasket = false
                 binding.basketGroup.toGone()
             }
         }
+    }
+
+    private fun alertLoginNeed(afterAction: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("로그인이 필요합니다.")
+            .setMessage("주문하려면 로그인이 필요합니다.\nMy 탭으로 이동하시겠습니까?")
+            .setPositiveButton("이동") { dialog, _ ->
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
     override fun onResume() {

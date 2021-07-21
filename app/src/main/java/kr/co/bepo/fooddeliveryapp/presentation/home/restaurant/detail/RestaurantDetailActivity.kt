@@ -8,8 +8,11 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
@@ -22,7 +25,12 @@ import kr.co.bepo.fooddeliveryapp.presentation.base.BaseActivity
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.RestaurantListFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.menu.RestaurantMenuListFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.review.RestaurantReviewListFragment
+import kr.co.bepo.fooddeliveryapp.presentation.main.MainActivity
+import kr.co.bepo.fooddeliveryapp.presentation.main.MainTabMenu
+import kr.co.bepo.fooddeliveryapp.presentation.order.OrderMenuListActivity
+import kr.co.bepo.fooddeliveryapp.utility.event.MenuChangeEventBus
 import kr.co.bepo.fooddeliveryapp.widget.adapter.RestaurantDetailListFragmentPagerAdapter
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.math.abs
@@ -45,6 +53,9 @@ class RestaurantDetailActivity :
     }
 
     private lateinit var viewPagerAdapter: RestaurantDetailListFragmentPagerAdapter
+
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val menuChangeEventBus: MenuChangeEventBus by inject()
 
     override fun getViewBinding(): ActivityRestaurantDetailBinding =
         ActivityRestaurantDetailBinding.inflate(layoutInflater)
@@ -209,7 +220,16 @@ class RestaurantDetailActivity :
             }
 
             basketButton.setOnClickListener {
-                // TODO 주문하기 화면으로 이동 or 로그인
+                if (firebaseAuth.currentUser == null) {
+                    alertLoginNeed {
+                        lifecycleScope.launch {
+                            menuChangeEventBus.changeMenu(MainTabMenu.MY)
+                            finish()
+                        }
+                    }
+                } else {
+                    startActivity(OrderMenuListActivity.newIntent(this@RestaurantDetailActivity))
+                }
             }
         }
 
@@ -219,6 +239,21 @@ class RestaurantDetailActivity :
             .setMessage("선택하신 메뉴를 장바구니에 담을 경우 이전에 담은 메뉴가 삭제됩니다.")
             .setPositiveButton("담기") { dialog, _ ->
                 viewModel.notifyClearBasket()
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun alertLoginNeed(afterAction: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle("로그인이 필요합니다.")
+            .setMessage("주문하려면 로그인이 필요합니다.\nMy 탭으로 이동하시겠습니까?")
+            .setPositiveButton("이동") { dialog, _ ->
                 afterAction()
                 dialog.dismiss()
             }

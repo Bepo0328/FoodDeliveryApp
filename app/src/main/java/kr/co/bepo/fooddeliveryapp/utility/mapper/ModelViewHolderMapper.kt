@@ -6,13 +6,15 @@ import kr.co.bepo.fooddeliveryapp.databinding.*
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType
 import kr.co.bepo.fooddeliveryapp.domain.model.Model
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
+import kr.co.bepo.fooddeliveryapp.presentation.order.OrderMenuListViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.EmptyViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.RestaurantLikeViewHolder
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.RestaurantViewHolder
-import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.food.FoodMenuViewHolder
-import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.restaurant.review.ReviewViewHolder
+import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.food.FoodMenuViewHolder
+import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.order.OrderMenuViewHolder
+import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.review.ReviewViewHolder
 
 object ModelViewHolderMapper {
 
@@ -47,6 +49,11 @@ object ModelViewHolderMapper {
             )
             CellType.REVIEW_CELL -> ReviewViewHolder(
                 ViewholderReviewBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+            CellType.ORDER_FOOD_CELL -> OrderMenuViewHolder(
+                ViewholderOrderMenuBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )
