@@ -57,7 +57,7 @@ class OrderMenuListActivity : BaseActivity<OrderMenuListViewModel, ActivityOrder
             is OrderMenuListState.Loading -> handleLoadingState()
             is OrderMenuListState.Success -> handleSuccessState(it)
             is OrderMenuListState.Order -> handleOrderState()
-            is OrderMenuListState.Error -> handleErrorState()
+            is OrderMenuListState.Error -> handleErrorState(it)
         }
     }
 
@@ -79,11 +79,12 @@ class OrderMenuListActivity : BaseActivity<OrderMenuListViewModel, ActivityOrder
     }
 
     private fun handleOrderState() = with(binding) {
-
+        Toast.makeText(this@OrderMenuListActivity, "성공적으로 주문을 완료하였습니다.", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
-    private fun handleErrorState() = with(binding) {
-
+    private fun handleErrorState(state: OrderMenuListState.Error) = with(binding) {
+        Toast.makeText(this@OrderMenuListActivity, getString(state.messageId, state.e), Toast.LENGTH_SHORT).show()
     }
 
 

@@ -177,6 +177,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 isShowBasket = true
+                if (viewModel.homeStateLiveData.value is HomeState.Success) {
+                    binding.basketGroup.toVisible()
+                }
                 binding.basketCountTextView.text = getString(R.string.basket_count, it.size)
                 binding.basketButton.setOnClickListener {
                     if (firebaseAuth.currentUser == null) {

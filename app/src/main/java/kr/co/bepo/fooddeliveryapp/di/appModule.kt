@@ -1,5 +1,7 @@
 package kr.co.bepo.fooddeliveryapp.di
 
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kr.co.bepo.fooddeliveryapp.data.entity.LocationLatLngEntity
 import kr.co.bepo.fooddeliveryapp.data.entity.MapSearchInfoEntity
@@ -8,6 +10,8 @@ import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
 import kr.co.bepo.fooddeliveryapp.data.preference.AppPreferenceManager
 import kr.co.bepo.fooddeliveryapp.data.repository.map.DefaultMapRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.map.MapRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.order.DefaultOrderRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.order.OrderRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.DefaultRestaurantRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.RestaurantRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.DefaultRestaurantFoodRepository
@@ -37,6 +41,8 @@ import org.koin.dsl.module
 val appModule = module {
     single { Dispatchers.IO }
     single { Dispatchers.Main }
+
+    single { Firebase.firestore }
 }
 
 val dataModule = module {
@@ -61,6 +67,7 @@ val dataModule = module {
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
     single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
+    single<OrderRepository> { DefaultOrderRepository(get(), get()) }
 
 }
 
@@ -101,7 +108,7 @@ val presentModule = module {
     }
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
     viewModel { RestaurantLikeListViewModel(get()) }
-    viewModel { OrderMenuListViewModel(get()) }
+    viewModel { OrderMenuListViewModel(get(), get()) }
 }
 
 val utilModule = module {

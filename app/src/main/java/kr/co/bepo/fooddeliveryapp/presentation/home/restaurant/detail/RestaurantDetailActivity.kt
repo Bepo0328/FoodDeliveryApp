@@ -5,6 +5,7 @@ import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone

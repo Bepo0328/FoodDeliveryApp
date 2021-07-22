@@ -5,13 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kr.co.bepo.fooddeliveryapp.R
+import kr.co.bepo.fooddeliveryapp.data.repository.order.DefaultOrderRepository
+import kr.co.bepo.fooddeliveryapp.data.repository.order.OrderRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType
 import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class OrderMenuListViewModel(
-    private val restaurantFoodRepository: RestaurantFoodRepository
+    private val restaurantFoodRepository: RestaurantFoodRepository,
+    private val orderRepository: OrderRepository
 ): BaseViewModel() {
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -36,15 +40,37 @@ class OrderMenuListViewModel(
         )
     }
 
-    fun orderMenu() {
-
+    fun orderMenu() = viewModelScope.launch {
+        val foodMenuList = restaurantFoodRepository.getAllFoodMenuListInBasket()
+        if (foodMenuList.isNotEmpty()) {
+            val restaurantId = foodMenuList.first().restaurantId
+            firebaseAuth.currentUser?.let { user ->
+                when (val data = orderRepository.orderMenu(user.uid, restaurantId, foodMenuList)) {
+                    is DefaultOrderRepository.Result.Success<*> -> {
+                        restaurantFoodRepository.clearFoodMenuInBasket()
+                        orderMenuStateLiveData.value = OrderMenuListState.Order
+                    }
+                    is DefaultOrderRepository.Result.Error -> {
+                        orderMenuStateLiveData.value = OrderMenuListState.Error(
+                            R.string.request_error, data.e
+                        )
+                    }
+                }
+            } ?: kotlin.run {
+                orderMenuStateLiveData.value = OrderMenuListState.Error(
+                    R.string.user_id_not_found, IllegalAccessException()
+                )
+            }
+        }
     }
 
-    fun clearOrderMenu() {
-
+    fun clearOrderMenu() = viewModelScope.launch {
+        restaurantFoodRepository.clearFoodMenuInBasket()
+        fetchData()
     }
 
-    fun removeOrderMenu(model: FoodModel) {
-
+    fun removeOrderMenu(model: FoodModel) = viewModelScope.launch {
+        restaurantFoodRepository.removeFoodMenuInBasket(model.foodId)
+        fetchData()
     }
 }
