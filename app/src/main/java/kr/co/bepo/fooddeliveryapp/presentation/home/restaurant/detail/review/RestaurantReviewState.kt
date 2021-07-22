@@ -1,6 +1,6 @@
 package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.review
 
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review.ReviewModel
+import kr.co.bepo.fooddeliveryapp.domain.model.review.ReviewModel
 
 sealed class RestaurantReviewState {
 

@@ -1,4 +1,4 @@
-package kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review
+package kr.co.bepo.fooddeliveryapp.domain.model.review
 
 import android.net.Uri
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType

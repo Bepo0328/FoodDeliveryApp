@@ -2,16 +2,14 @@ package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.order
 
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import kr.co.bepo.fooddeliveryapp.R
-import kr.co.bepo.fooddeliveryapp.databinding.ViewholderFoodMenuBinding
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderOrderMenuBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.extensions.clear
 import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
 import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.order.OrderMenuListListener
-import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.restaurant.FoodMenuListListener
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 
 class OrderMenuViewHolder(

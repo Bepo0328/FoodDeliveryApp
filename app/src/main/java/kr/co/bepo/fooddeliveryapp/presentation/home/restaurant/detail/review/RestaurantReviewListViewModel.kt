@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.review.RestaurantReviewRepository
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review.ReviewModel
+import kr.co.bepo.fooddeliveryapp.domain.model.review.ReviewModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class RestaurantReviewListViewModel(

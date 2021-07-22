@@ -1,4 +1,4 @@
-package kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food
+package kr.co.bepo.fooddeliveryapp.domain.model.food
 
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType

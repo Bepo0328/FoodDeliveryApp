@@ -6,7 +6,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class RestaurantMenuListViewModel(

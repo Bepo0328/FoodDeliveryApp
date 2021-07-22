@@ -1,7 +1,7 @@
 package kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.review
 
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderReviewBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review.ReviewModel
+import kr.co.bepo.fooddeliveryapp.domain.model.review.ReviewModel
 import kr.co.bepo.fooddeliveryapp.extensions.clear
 import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.extensions.toGone

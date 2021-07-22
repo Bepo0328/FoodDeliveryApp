@@ -9,10 +9,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentMyBinding
+import kr.co.bepo.fooddeliveryapp.domain.model.order.OrderModel
 import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.extensions.toGone
 import kr.co.bepo.fooddeliveryapp.extensions.toVisible
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
+import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
+import kr.co.bepo.fooddeliveryapp.widget.adapter.ModelRecyclerAdapter
+import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
@@ -45,6 +50,17 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
             }
         }
 
+    private val resourcesProvider: ResourcesProvider by inject()
+
+    private val adapter by lazy {
+        ModelRecyclerAdapter<OrderModel, MyViewModel>(
+            listOf(),
+            viewModel,
+            resourcesProvider,
+            adapterListener = object : AdapterListener {}
+        )
+    }
+
     override fun initViews() = with(binding) {
         loginButton.setOnClickListener {
             signInGoogle()
@@ -54,6 +70,8 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
             firebaseAuth.signOut()
             viewModel.signOut()
         }
+
+        recyclerView.adapter = adapter
     }
 
     override fun observeData() = viewModel.myStateLiveData.observe(viewLifecycleOwner) {
@@ -61,7 +79,7 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
             is MyState.Loading -> handleLoadingState()
             is MyState.Success -> handleSuccessState(it)
             is MyState.Login -> handleLoginState(it)
-            is MyState.Error -> handleErrorState(it)
+            is MyState.Error -> Unit
             else -> Unit
         }
     }
@@ -84,7 +102,6 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
                 profileGroup.toGone()
                 loginRequiredGroup.toVisible()
             }
-            else -> Unit
         }
     }
 
@@ -93,6 +110,7 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
         loginRequiredGroup.toGone()
         profileImageView.load(state.profileImageUri.toString(), 60f)
         userNameTextView.text = state.userName
+        adapter.submitList(state.orderList)
     }
 
     private fun handleLoginState(state: MyState.Login) = with(binding) {
@@ -108,10 +126,6 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
                     viewModel.setUserInfo(null)
                 }
             }
-    }
-
-    private fun handleErrorState(state: MyState.Error) = with(binding) {
-
     }
 
 }

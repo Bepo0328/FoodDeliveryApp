@@ -4,7 +4,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import kr.co.bepo.fooddeliveryapp.data.entity.RestaurantFoodEntity
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentListBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.RestaurantDetailViewModel
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider

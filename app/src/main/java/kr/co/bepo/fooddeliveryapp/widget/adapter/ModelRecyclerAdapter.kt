@@ -11,20 +11,25 @@ import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
 import kr.co.bepo.fooddeliveryapp.widget.adapter.viewholder.ModelViewHolder
 
 class ModelRecyclerAdapter<M : Model, VM : BaseViewModel>(
-    private var modelList : List<Model>,
+    private var modelList: List<Model>,
     private val viewModel: VM,
     private val resourcesProvider: ResourcesProvider,
     private val adapterListener: AdapterListener
-): ListAdapter<Model, ModelViewHolder<M>>(Model.DIFF_CALLBACK) {
+) : ListAdapter<Model, ModelViewHolder<M>>(Model.DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder<M> {
-        return ModelViewHolderMapper.map(parent, CellType.values()[viewType], viewModel, resourcesProvider)
+        return ModelViewHolderMapper.map(
+            parent,
+            CellType.values()[viewType],
+            viewModel,
+            resourcesProvider
+        )
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: ModelViewHolder<M>, position: Int) {
-        with (holder) {
+        with(holder) {
             bindData(modelList[position] as M)
             bindViews(modelList[position] as M, adapterListener)
         }

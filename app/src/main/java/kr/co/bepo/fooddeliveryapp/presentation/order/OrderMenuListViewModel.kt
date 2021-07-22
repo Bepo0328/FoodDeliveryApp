@@ -10,7 +10,7 @@ import kr.co.bepo.fooddeliveryapp.data.repository.order.DefaultOrderRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.order.OrderRepository
 import kr.co.bepo.fooddeliveryapp.data.repository.restaurant.food.RestaurantFoodRepository
 import kr.co.bepo.fooddeliveryapp.domain.model.CellType
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseViewModel
 
 class OrderMenuListViewModel(

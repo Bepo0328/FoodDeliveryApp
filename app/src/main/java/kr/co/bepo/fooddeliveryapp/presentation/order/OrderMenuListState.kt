@@ -1,7 +1,7 @@
 package kr.co.bepo.fooddeliveryapp.presentation.order
 
 import androidx.annotation.StringRes
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 
 sealed class OrderMenuListState {
 

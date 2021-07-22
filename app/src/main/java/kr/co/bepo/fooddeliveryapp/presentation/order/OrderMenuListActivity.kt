@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import kr.co.bepo.fooddeliveryapp.databinding.ActivityOrderMenuListBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.food.FoodModel
+import kr.co.bepo.fooddeliveryapp.domain.model.food.FoodModel
 import kr.co.bepo.fooddeliveryapp.extensions.toGone
 import kr.co.bepo.fooddeliveryapp.extensions.toVisible
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseActivity

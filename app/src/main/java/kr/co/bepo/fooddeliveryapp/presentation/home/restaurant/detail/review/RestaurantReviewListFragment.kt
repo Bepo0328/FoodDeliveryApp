@@ -2,7 +2,7 @@ package kr.co.bepo.fooddeliveryapp.presentation.home.restaurant.detail.review
 
 import androidx.core.os.bundleOf
 import kr.co.bepo.fooddeliveryapp.databinding.FragmentListBinding
-import kr.co.bepo.fooddeliveryapp.domain.model.restaurant.review.ReviewModel
+import kr.co.bepo.fooddeliveryapp.domain.model.review.ReviewModel
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.ModelRecyclerAdapter
