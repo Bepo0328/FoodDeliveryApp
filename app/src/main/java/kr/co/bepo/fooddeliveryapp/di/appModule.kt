@@ -1,5 +1,6 @@
 package kr.co.bepo.fooddeliveryapp.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +44,7 @@ val appModule = module {
     single { Dispatchers.Main }
 
     single { Firebase.firestore }
+    single { FirebaseAuth.getInstance() }
 }
 
 val dataModule = module {

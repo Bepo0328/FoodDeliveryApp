@@ -12,7 +12,8 @@ data class FoodModel(
     val description: String,
     val price: Int,
     val imageUrl: String,
-    val foodId: String
+    val foodId: String,
+    val restaurantTitle: String
 ): Model(id, type) {
 
     fun toEntity(basketIndex: Int) = RestaurantFoodEntity(
@@ -21,6 +22,7 @@ data class FoodModel(
         title = title,
         description = description,
         price = price,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        restaurantTitle = restaurantTitle
     )
 }

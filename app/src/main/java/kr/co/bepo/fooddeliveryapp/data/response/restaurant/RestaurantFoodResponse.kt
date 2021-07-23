@@ -15,13 +15,14 @@ data class RestaurantFoodResponse(
     @SerializedName("imageUrl")
     val imageUrl: String
 ) {
-    fun toEntity(restaurantId: Long) =
+    fun toEntity(restaurantId: Long, restaurantTitle: String) =
         RestaurantFoodEntity(
             id = id,
             restaurantId = restaurantId,
             title = title,
             description = description,
             price = price.toDouble().toInt(),
-            imageUrl = imageUrl
+            imageUrl = imageUrl,
+            restaurantTitle = restaurantTitle
         )
 }
