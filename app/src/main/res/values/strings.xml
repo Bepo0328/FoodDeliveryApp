@@ -72,5 +72,7 @@
     <string name="delete">삭제</string>
     <string name="confirm">확인</string>
     <string name="add_restaurant_review">%s 리뷰 등록</string>
+    <string name="chapter">촬영</string>
+    <string name="images_page">(%d/%d)</string>
 
 </resources>

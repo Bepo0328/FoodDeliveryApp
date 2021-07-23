@@ -3,6 +3,8 @@ package kr.co.bepo.fooddeliveryapp.presentation.review
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +22,8 @@ import kr.co.bepo.fooddeliveryapp.data.entity.ReviewEntity
 import kr.co.bepo.fooddeliveryapp.databinding.ActivityAddRestaurantReviewBinding
 import kr.co.bepo.fooddeliveryapp.extensions.toGone
 import kr.co.bepo.fooddeliveryapp.extensions.toVisible
+import kr.co.bepo.fooddeliveryapp.presentation.review.gallery.GalleryActivity
+import kr.co.bepo.fooddeliveryapp.presentation.review.photo.CameraActivity
 import kr.co.bepo.fooddeliveryapp.widget.adapter.PhotoListAdapter
 import org.koin.android.ext.android.inject
 
@@ -32,6 +36,15 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
 
         const val RESTAURANT_TITLE_KEY = "restaurantTitle"
         const val ORDER_ID_KEY = "orderId"
+
+        fun newIntent(
+            context: Context,
+            orderId: String,
+            restaurantTitle: String
+        ) = Intent(context, AddRestaurantReviewActivity::class.java).apply {
+            putExtra(ORDER_ID_KEY, orderId)
+            putExtra(RESTAURANT_TITLE_KEY, restaurantTitle)
+        }
     }
 
     private var imageUriList: ArrayList<Uri> = arrayListOf()
@@ -56,7 +69,13 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         photoRecyclerView.adapter = photoListAdapter
+
+        titleTextView.text = restaurantTitle
 
         imageAddButton.setOnClickListener {
             showPictureUploadDialog()

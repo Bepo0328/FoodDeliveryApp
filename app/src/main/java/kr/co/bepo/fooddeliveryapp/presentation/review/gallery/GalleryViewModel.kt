@@ -1,4 +1,4 @@
-package kr.co.bepo.fooddeliveryapp.presentation.gallery
+package kr.co.bepo.fooddeliveryapp.presentation.review.gallery
 
 import android.os.Build
 import androidx.annotation.RequiresApi

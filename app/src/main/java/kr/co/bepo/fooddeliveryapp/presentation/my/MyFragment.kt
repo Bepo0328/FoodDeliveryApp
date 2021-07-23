@@ -14,9 +14,10 @@ import kr.co.bepo.fooddeliveryapp.extensions.load
 import kr.co.bepo.fooddeliveryapp.extensions.toGone
 import kr.co.bepo.fooddeliveryapp.extensions.toVisible
 import kr.co.bepo.fooddeliveryapp.presentation.base.BaseFragment
+import kr.co.bepo.fooddeliveryapp.presentation.review.AddRestaurantReviewActivity
 import kr.co.bepo.fooddeliveryapp.utility.provider.ResourcesProvider
 import kr.co.bepo.fooddeliveryapp.widget.adapter.ModelRecyclerAdapter
-import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.AdapterListener
+import kr.co.bepo.fooddeliveryapp.widget.adapter.listener.order.OrderListListener
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -57,8 +58,13 @@ class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
             listOf(),
             viewModel,
             resourcesProvider,
-            adapterListener = object : AdapterListener {}
-        )
+            adapterListener = object : OrderListListener {
+                override fun writeRestaurantReview(orderId: String, restaurantTitle: String) {
+                    startActivity(
+                        AddRestaurantReviewActivity.newIntent(requireContext(), orderId, restaurantTitle)
+                    )
+                }
+            })
     }
 
     override fun initViews() = with(binding) {

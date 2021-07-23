@@ -43,6 +43,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_round_corner_8_black"
+                android:backgroundTint="@color/white"
                 android:contentDescription="@string/no_image_found"
                 android:foreground="@drawable/ic_close"
                 app:layout_constraintStart_toStartOf="parent"

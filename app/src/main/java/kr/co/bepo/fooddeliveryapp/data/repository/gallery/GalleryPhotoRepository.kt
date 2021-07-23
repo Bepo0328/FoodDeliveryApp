@@ -9,7 +9,7 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kr.co.bepo.fooddeliveryapp.presentation.gallery.GalleryPhoto
+import kr.co.bepo.fooddeliveryapp.presentation.review.gallery.GalleryPhoto
 
 internal class GalleryPhotoRepository(
     private val context: Context

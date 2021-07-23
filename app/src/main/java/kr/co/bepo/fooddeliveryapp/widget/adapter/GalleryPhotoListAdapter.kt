@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.databinding.ViewholderGalleryPhotoItemBinding
 import kr.co.bepo.fooddeliveryapp.extensions.load
-import kr.co.bepo.fooddeliveryapp.presentation.gallery.GalleryPhoto
+import kr.co.bepo.fooddeliveryapp.presentation.review.gallery.GalleryPhoto
 
 class GalleryPhotoListAdapter(
     private val checkPhotoListener: (GalleryPhoto) -> Unit

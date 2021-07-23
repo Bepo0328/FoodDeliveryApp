@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".FoodDeliveryAppApplication"
         android:allowBackup="true"
@@ -28,7 +32,9 @@
         <activity android:name=".presentation.home.restaurant.detail.RestaurantDetailActivity" />
         <activity android:name=".presentation.order.OrderMenuListActivity" />
         <activity android:name=".presentation.review.AddRestaurantReviewActivity" />
-        <activity android:name=".presentation.gallery.GalleryActivity" />
+        <activity android:name="kr.co.bepo.fooddeliveryapp.presentation.review.gallery.GalleryActivity" />
+        <activity android:name=".presentation.review.photo.CameraActivity" />
+        <activity android:name=".presentation.review.photo.ImagePreviewListActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
