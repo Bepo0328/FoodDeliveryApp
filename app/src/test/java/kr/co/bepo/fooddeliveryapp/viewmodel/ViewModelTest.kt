@@ -22,13 +22,13 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
 @ExperimentalCoroutinesApi
-class ViewModelTest : KoinTest {
+internal abstract class ViewModelTest: KoinTest {
 
     @get:Rule
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Mock
     private lateinit var context: Application
@@ -50,10 +50,10 @@ class ViewModelTest : KoinTest {
         Dispatchers.resetMain()
     }
 
-    protected fun <T> LiveData<T>.test() : LiveDataTestObserver<T> {
+    protected fun <T> LiveData<T>.test(): LiveDataTestObserver<T> {
         val testObserver = LiveDataTestObserver<T>()
         observeForever(testObserver)
+
         return testObserver
     }
-
 }
