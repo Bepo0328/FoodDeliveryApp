@@ -37,6 +37,7 @@ class DefaultOrderRepository(
         return@withContext result
     }
 
+    @Suppress("UNCHECKED_CAST")
     override suspend fun getAllOrderMenus(userId: String): Result = withContext(ioDispatcher) {
         return@withContext try {
             val result: QuerySnapshot = firestore

@@ -40,6 +40,7 @@ class MyViewModel(
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun setUserInfo(firebaseUser: FirebaseUser?) = viewModelScope.launch {
         firebaseUser?.let { user ->
             when (val orderMenuResult = orderRepository.getAllOrderMenus(user.uid)) {

@@ -11,6 +11,7 @@ class DefaultRestaurantReviewRepository(
     private val firestore: FirebaseFirestore
 ) : RestaurantReviewRepository {
 
+    @Suppress("UNCHECKED_CAST")
     override suspend fun getReviews(restaurantTitle: String): Result = withContext(ioDispatcher) {
         return@withContext try {
             val snapshot = firestore
@@ -39,8 +40,8 @@ class DefaultRestaurantReviewRepository(
 
     sealed class Result {
 
-        data class Success<T>(
-            val data: T? = null
+        data class Success(
+            val data: List<ReviewEntity>? = null
         ) : Result()
 
         data class Error(
