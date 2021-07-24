@@ -32,7 +32,7 @@ class ReviewViewHolder(
             reviewThumbnailImageView.toGone()
         }
         reviewUserTextView.text = model.title
-        ratingBar.rating = model.grade.toFloat()
+        ratingBar.rating = model.grade
         reviewTextView.text = model.description
     }
 

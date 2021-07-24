@@ -9,4 +9,4 @@ data class MapSearchInfoEntity(
     val fullAddress: String,
     val name: String,
     val locationLatLngEntity: LocationLatLngEntity
-): Entity, Parcelable
+) : Entity, Parcelable
