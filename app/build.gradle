@@ -116,9 +116,9 @@ dependencies {
     implementation("me.relex:circleindicator:$circleindicator_version")
 
     // Test
-    testImplementation "org.koin:koin-test:2.1.5"
-    testImplementation 'org.mockito:mockito-inline:3.4.0'
-    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation("io.insert-koin:koin-test:$koin_version")
+    testImplementation("org.mockito:mockito-inline:3.4.0")
+    testImplementation("android.arch.core:core-testing:1.1.1")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
