@@ -1,7 +1,12 @@
 package kr.co.bepo.fooddeliveryapp.presentation.main
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.annotation.IdRes
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +17,7 @@ import kr.co.bepo.fooddeliveryapp.R
 import kr.co.bepo.fooddeliveryapp.databinding.ActivityMainBinding
 import kr.co.bepo.fooddeliveryapp.utility.event.MenuChangeEventBus
 import org.koin.android.ext.android.inject
+import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity() {
 

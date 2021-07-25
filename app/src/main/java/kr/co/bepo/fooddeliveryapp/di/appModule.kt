@@ -112,7 +112,7 @@ val presentModule = module {
     }
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
     viewModel { RestaurantLikeListViewModel(get()) }
-    viewModel { (firebaseAuth: FirebaseAuth) -> OrderMenuListViewModel(get(), get(), firebaseAuth) }
+    viewModel { OrderMenuListViewModel(get(), get(), get()) }
 }
 
 val utilModule = module {
